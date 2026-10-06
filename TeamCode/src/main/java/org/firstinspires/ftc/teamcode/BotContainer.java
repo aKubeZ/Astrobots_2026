@@ -1,18 +1,25 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.arcrobotics.ftclib.command.Command;
-import com.arcrobotics.ftclib.command.RunCommand;
+import com.arcrobotics.ftclib.command.InstantCommand;
 import com.arcrobotics.ftclib.gamepad.GamepadEx;
-import com.arcrobotics.ftclib.gamepad.GamepadKeys;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.teamcode.commands.TestCommand;
-import org.firstinspires.ftc.teamcode.subsystems.TestMotor;
+import org.firstinspires.ftc.teamcode.commands.AutoCommand;
+import org.firstinspires.ftc.teamcode.commands.DataLog;
+import org.firstinspires.ftc.teamcode.subsystems.Gyroscope;
+
+import org.firstinspires.ftc.teamcode.commands.Drive;
+import org.firstinspires.ftc.teamcode.subsystems.Drivetrain;
 
 public class BotContainer {
-    TestMotor testMotor = TestMotor.getInstance();
-    GamepadEx pilot = Constants.pilot;
-    GamepadEx copilot = Constants.copilot;
-    private Bot.Alliance alliance;
+    private final GamepadEx pilot = Constants.pilot;
+    private final GamepadEx copilot = Constants.copilot;
+    private final Drivetrain drivetrain = Drivetrain.getInstance();
+    private final Gyroscope gyroscope = Gyroscope.getInstance();
+    private DataLog logger;
+    private final ElapsedTime stopwatch = new ElapsedTime();
+    private final Bot.Alliance alliance;
 
     public BotContainer(Bot.Alliance alliance) {
         this.alliance = alliance;
@@ -20,15 +27,37 @@ public class BotContainer {
         configBindings();
     }
 
+    /**
+     * Sets the commands that are run by default
+     * when no other command is running.
+     */
     private void setDefaultCommands() {
+        drivetrain.setInitialHeading(gyroscope.getHeading()); // idk where to put this so here :3
+        drivetrain.setDefaultCommand(new Drive(false,
+                pilot::getLeftX,
+                () -> -pilot.getLeftY(), // flip Y bc i think thats how gamepads work
+                pilot::getRightX
+        ));
 
+        logger = new DataLog(
+                new DataLog.Entry("six", () -> "seven"),
+                new DataLog.Entry("heading", () -> Double.toString(gyroscope.getHeading()))
+        );
+        logger.schedule();
     }
 
+    /**
+     * Configures the commands that run when a button or trigger is pressed.
+     */
     private void configBindings() {
-        pilot.getGamepadButton(GamepadKeys.Button.A).whenHeld(new TestCommand());
+
     }
 
+    /**
+     * Returns the auto command.
+     * @return the autonomous command to be used
+     */
     public Command getAutonomousCommand() {
-        return new RunCommand(() -> {});
+        return new AutoCommand(alliance);
     }
 }

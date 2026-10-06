@@ -6,11 +6,10 @@ import com.arcrobotics.ftclib.gamepad.GamepadEx;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.Bot;
-import org.firstinspires.ftc.teamcode.BotContainer;
 import org.firstinspires.ftc.teamcode.Constants;
 
-@TeleOp(name = "test op mode")
-public class TestOpMode extends CommandOpMode {
+@TeleOp(name = "main tele op mode")
+public class MainTeleOp extends CommandOpMode {
     private Robot bot;
 
     @Override
