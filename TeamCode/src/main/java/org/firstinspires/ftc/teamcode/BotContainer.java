@@ -35,13 +35,16 @@ public class BotContainer {
         drivetrain.setInitialHeading(gyroscope.getHeading()); // idk where to put this so here :3
         drivetrain.setDefaultCommand(new Drive(false,
                 pilot::getLeftX,
-                () -> -pilot.getLeftY(), // flip Y bc i think thats how gamepads work
+                pilot::getLeftY, // idk
                 pilot::getRightX
         ));
 
         logger = new DataLog(
                 new DataLog.Entry("six", () -> "seven"),
-                new DataLog.Entry("heading", () -> Double.toString(gyroscope.getHeading()))
+                new DataLog.Entry("heading", () -> Double.toString(gyroscope.getHeading())),
+                new DataLog.Entry("left x", () -> Double.toString(pilot.getLeftX())),
+                new DataLog.Entry("left y", () -> Double.toString(pilot.getLeftY())),
+                new DataLog.Entry("right x", () -> Double.toString(pilot.getRightX()))
         );
         logger.schedule();
     }

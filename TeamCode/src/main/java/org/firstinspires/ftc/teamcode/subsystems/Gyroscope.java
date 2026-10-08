@@ -1,8 +1,9 @@
 package org.firstinspires.ftc.teamcode.subsystems;
 
 import com.arcrobotics.ftclib.command.SubsystemBase;
-import com.arcrobotics.ftclib.hardware.GyroEx;
+import com.qualcomm.robotcore.hardware.IMU;
 
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.teamcode.Constants;
 
 /**
@@ -21,16 +22,14 @@ public class Gyroscope extends SubsystemBase {
         return instance;
     }
 
-    GyroEx gyro;
+    IMU gyro;
     private Gyroscope() {
-        gyro = Constants.hardwareMap.get(GyroEx.class, "gyro");
+        gyro = Constants.hardwareMap.get(IMU.class, "imu");
     }
 
     /**
      * Returns the heading of the gyroscope.
      * @return gyroscope heading
      */
-    public double getHeading() {
-        return gyro.getHeading();
-    }
+    public double getHeading() { return gyro.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS); }
 }
