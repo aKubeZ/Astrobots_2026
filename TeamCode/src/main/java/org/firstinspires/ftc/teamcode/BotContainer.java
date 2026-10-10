@@ -41,6 +41,7 @@ public class BotContainer {
 
         logger = new DataLog(
                 new DataLog.Entry("six", () -> "seven"),
+                new DataLog.Entry("elapsed time", () -> Double.toString(stopwatch.seconds())),
                 new DataLog.Entry("heading", () -> Double.toString(gyroscope.getHeading())),
                 new DataLog.Entry("left x", () -> Double.toString(pilot.getLeftX())),
                 new DataLog.Entry("left y", () -> Double.toString(pilot.getLeftY())),

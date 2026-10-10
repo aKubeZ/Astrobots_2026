@@ -32,9 +32,6 @@ public class Drivetrain extends SubsystemBase {
         motorFR = Constants.hardwareMap.get(DcMotorEx.class, "fr");
         motorBL = Constants.hardwareMap.get(DcMotorEx.class, "bl");
         motorBR = Constants.hardwareMap.get(DcMotorEx.class, "br");
-
-//        motorFR.setDirection(DcMotorSimple.Direction.REVERSE);
-//        motorBR.setDirection(DcMotorSimple.Direction.REVERSE);
     }
 
     public void setInitialHeading(double heading) { this.initialHeading = heading; }
@@ -64,8 +61,9 @@ public class Drivetrain extends SubsystemBase {
             [ cos   -sin ] [ x ] = [ x cos - y sin ]
             [ sin    cos ] [ y ] = [ x sin + y cos ]
          */
-        double cos = Math.cos(heading - initialHeading);
-        double sin = Math.sin(heading - initialHeading);
+        double angle = -(heading - initialHeading); // flipped bc clockwise
+        double sin = Math.sin(angle);
+        double cos = Math.cos(angle);
         double robotX = x * cos - y * sin;
         double robotY = x * sin + y * cos;
         driveRC(robotX, robotY, rot);
