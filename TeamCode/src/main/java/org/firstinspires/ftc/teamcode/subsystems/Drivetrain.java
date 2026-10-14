@@ -78,4 +78,28 @@ public class Drivetrain extends SubsystemBase {
         motorBL.setPower(0);
         motorBR.setPower(0);
     }
+
+    /**
+     * Returns the current position of the front left motor
+     * @return the front left motor's position
+     */
+    public double getFLPosition() { return motorFL.getCurrentPosition(); }
+
+    /**
+     * Returns the current position of the front right motor
+     * @return the front right motor's position
+     */
+    public double getFRPosition() { return motorFR.getCurrentPosition(); }
+
+    /**
+     * Returns the current position of the back left motor
+     * @return the back left motor's position
+     */
+    public double getBLPosition() { return motorBL.getCurrentPosition(); }
+
+    /**
+     * Returns the current position of the back right motor
+     * @return the back right motor's position
+     */
+    public double getBRPosition() { return motorBR.getCurrentPosition(); }
 }

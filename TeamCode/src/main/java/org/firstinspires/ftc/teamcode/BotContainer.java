@@ -45,7 +45,11 @@ public class BotContainer {
                 new DataLog.Entry("heading", () -> Double.toString(gyroscope.getHeading())),
                 new DataLog.Entry("left x", () -> Double.toString(pilot.getLeftX())),
                 new DataLog.Entry("left y", () -> Double.toString(pilot.getLeftY())),
-                new DataLog.Entry("right x", () -> Double.toString(pilot.getRightX()))
+                new DataLog.Entry("right x", () -> Double.toString(pilot.getRightX())),
+                new DataLog.Entry("fl motor", () -> Double.toString(drivetrain.getFLPosition())),
+                new DataLog.Entry("fr motor", () -> Double.toString(drivetrain.getFRPosition())),
+                new DataLog.Entry("bl motor", () -> Double.toString(drivetrain.getBLPosition())),
+                new DataLog.Entry("br motor", () -> Double.toString(drivetrain.getBRPosition()))
         );
         logger.schedule();
     }
