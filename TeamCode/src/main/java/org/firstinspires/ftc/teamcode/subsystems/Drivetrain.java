@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.subsystems;
 
 import com.arcrobotics.ftclib.command.SubsystemBase;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
@@ -32,14 +33,24 @@ public class Drivetrain extends SubsystemBase {
         motorFR = Constants.hardwareMap.get(DcMotorEx.class, "fr");
         motorBL = Constants.hardwareMap.get(DcMotorEx.class, "bl");
         motorBR = Constants.hardwareMap.get(DcMotorEx.class, "br");
+
+        motorFL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        motorFR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        motorBL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        motorBR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
 
+    /**
+     * Sets the initial heading of the robot, to make a reference
+     * to base the field-centric drive on.
+     * @param heading the initial heading
+     */
     public void setInitialHeading(double heading) { this.initialHeading = heading; }
 
     /**
-     * Drives the robot using robot centric
-     * @param x positive moves it right, negative moves it left.
-     * @param y positive moves it forwards, negative moves it backwards.
+     * Drives the robot using robot centric.
+     * @param x positive moves it right, negative moves it left
+     * @param y positive moves it forwards, negative moves it backwards
      * @param rot positive spins it clockwise, negative spins it counter-clockwise
      */
     public void driveRC(double x, double y, double rot) {
@@ -52,8 +63,8 @@ public class Drivetrain extends SubsystemBase {
 
      /**
      * Drives the robot using field centric (NOT IMPLEMENTED YET PLS DO NOT USE YET)
-     * @param x positive moves it right, negative moves it left.
-     * @param y positive moves it forwards, negative moves it backwards.
+     * @param x positive moves it right, negative moves it left
+     * @param y positive moves it forwards, negative moves it backwards
      * @param rot positive spins it clockwise, negative spins it counter-clockwise
      */
     public void driveFC(double x, double y, double rot, double heading) {
@@ -78,6 +89,11 @@ public class Drivetrain extends SubsystemBase {
         motorBL.setPower(0);
         motorBR.setPower(0);
     }
+
+    public void setFLPower(double power) { motorFL.setPower(power); }
+    public void setFRPower(double power) { motorFR.setPower(power); }
+    public void setBLPower(double power) { motorBL.setPower(power); }
+    public void setBRPower(double power) { motorBR.setPower(power); }
 
     /**
      * Returns the current position of the front left motor

@@ -20,6 +20,6 @@ public class MainAuto extends CommandOpMode {
         Constants.pilot = new GamepadEx(gamepad1);
         Constants.copilot = new GamepadEx(gamepad2);
 
-        bot = new Bot(Bot.OpMode.AUTO, Bot.Alliance.BLUE);
+        bot = new Bot(Bot.OpMode.AUTO, Bot.Alliance.BLUE, Bot.ButtonConfig.AUTO);
     }
 }

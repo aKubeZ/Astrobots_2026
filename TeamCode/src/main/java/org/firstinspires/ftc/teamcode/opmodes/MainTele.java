@@ -9,7 +9,7 @@ import org.firstinspires.ftc.teamcode.Bot;
 import org.firstinspires.ftc.teamcode.Constants;
 
 @TeleOp(name = "main tele op mode")
-public class MainTeleOp extends CommandOpMode {
+public class MainTele extends CommandOpMode {
     private Robot bot;
 
     @Override
@@ -19,6 +19,6 @@ public class MainTeleOp extends CommandOpMode {
         Constants.pilot = new GamepadEx(gamepad1);
         Constants.copilot = new GamepadEx(gamepad2);
 
-        bot = new Bot(Bot.OpMode.TELEOP, Bot.Alliance.BLUE);
+        bot = new Bot(Bot.OpMode.TELEOP, Bot.Alliance.BLUE, Bot.ButtonConfig.TELE);
     }
 }

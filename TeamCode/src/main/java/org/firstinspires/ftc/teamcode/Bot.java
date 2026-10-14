@@ -16,9 +16,15 @@ public class Bot extends Robot {
         BLUE, RED
     }
 
-    public Bot(OpMode opMode, Alliance alliance) {
+    public enum ButtonConfig {
+        TELE,
+        AUTO,
+        DRIVETRAIN_TEST
+    }
+
+    public Bot(OpMode opMode, Alliance alliance, ButtonConfig buttonConfig) {
         this.opMode = opMode;
-        container = new BotContainer(alliance);
+        container = new BotContainer(alliance, buttonConfig);
 
         switch (opMode) {
             case TELEOP: {
