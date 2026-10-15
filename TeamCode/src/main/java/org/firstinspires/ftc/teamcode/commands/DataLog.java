@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.function.Supplier;
 
 /**
- * Command that logs data in the telemetry
+ * Command that constantly logs and updates data in the telemetry
  */
 public class DataLog extends CommandBase {
     /**

@@ -3,20 +3,29 @@ package org.firstinspires.ftc.teamcode;
 import com.arcrobotics.ftclib.command.Command;
 import com.arcrobotics.ftclib.command.InstantCommand;
 import com.arcrobotics.ftclib.gamepad.GamepadEx;
+import com.arcrobotics.ftclib.gamepad.GamepadKeys;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.commands.AutoCommand;
 import org.firstinspires.ftc.teamcode.commands.DataLog;
+import org.firstinspires.ftc.teamcode.commands.Shoot;
 import org.firstinspires.ftc.teamcode.subsystems.Gyroscope;
 
 import org.firstinspires.ftc.teamcode.commands.Drive;
 import org.firstinspires.ftc.teamcode.subsystems.Drivetrain;
+import org.firstinspires.ftc.teamcode.subsystems.Shooter;
 
 public class BotContainer {
+    // controllers
     private final GamepadEx pilot = Constants.pilot;
     private final GamepadEx copilot = Constants.copilot;
+
+    // subsystems
     private final Drivetrain drivetrain = Drivetrain.getInstance();
     private final Gyroscope gyroscope = Gyroscope.getInstance();
+    private final Shooter shooter = Shooter.getInstance();
+
+    // others
     private DataLog logger;
     private final ElapsedTime stopwatch = new ElapsedTime();
     private final Bot.Alliance alliance;
@@ -54,7 +63,7 @@ public class BotContainer {
      * Configures the commands that run when a button or trigger is pressed.
      */
     private void configBindings() {
-
+        copilot.getGamepadButton(GamepadKeys.Button.A).whenHeld(new Shoot(10));
     }
 
     /**
