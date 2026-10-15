@@ -5,7 +5,7 @@ import com.arcrobotics.ftclib.command.Command;
 
 public class Bot extends Robot {
     public Command autoCommand = null;
-    public BotContainer container;
+    public final BotContainer container;
     public final OpMode opMode;
 
     public enum OpMode {

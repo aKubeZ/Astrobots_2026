@@ -14,12 +14,20 @@ import org.firstinspires.ftc.teamcode.commands.Drive;
 import org.firstinspires.ftc.teamcode.subsystems.Drivetrain;
 
 public class BotContainer {
+    private static final ElapsedTime stopwatch = new ElapsedTime();
+
+    /**
+     * Returns the current timestamp.
+     * @return the current timestamp.
+     */
+    public static double timestamp() { return stopwatch.seconds(); }
+
+
     private final GamepadEx pilot = Constants.pilot;
     private final GamepadEx copilot = Constants.copilot;
     private final Drivetrain drivetrain = Drivetrain.getInstance();
     private final Gyroscope gyroscope = Gyroscope.getInstance();
     private DataLog logger;
-    private final ElapsedTime stopwatch = new ElapsedTime();
     private final Bot.Alliance alliance;
     private final Bot.ButtonConfig buttonConfig;
 
@@ -38,7 +46,7 @@ public class BotContainer {
         drivetrain.setInitialHeading(gyroscope.getHeading()); // idk where to put this so here :3
         logger = new DataLog(
                 new DataLog.Entry("six", () -> "seven"),
-                new DataLog.Entry("elapsed time", () -> Double.toString(stopwatch.seconds())),
+                new DataLog.Entry("elapsed time", () -> Double.toString(timestamp())),
                 new DataLog.Entry("heading", () -> Double.toString(gyroscope.getHeading())),
                 new DataLog.Entry("left x", () -> Double.toString(pilot.getLeftX())),
                 new DataLog.Entry("left y", () -> Double.toString(pilot.getLeftY())),

@@ -45,14 +45,14 @@ public class Drive extends CommandBase {
     @Override
     public void execute() {
         if (fieldCentric)
-            drivetrain.driveFC(
+            drivetrain.driveFieldCentric(
                     xSupplier.getAsDouble(),
                     ySupplier.getAsDouble(),
                     rotSupplier.getAsDouble(),
                     gyroscope.getHeading()
             );
         else
-            drivetrain.driveRC(
+            drivetrain.driveRobotCentric(
                     xSupplier.getAsDouble(),
                     ySupplier.getAsDouble(),
                     rotSupplier.getAsDouble()

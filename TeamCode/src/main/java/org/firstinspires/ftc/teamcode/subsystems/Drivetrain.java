@@ -3,7 +3,6 @@ package org.firstinspires.ftc.teamcode.subsystems;
 import com.arcrobotics.ftclib.command.SubsystemBase;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 import org.firstinspires.ftc.teamcode.Constants;
 
@@ -11,6 +10,23 @@ import org.firstinspires.ftc.teamcode.Constants;
  * Drivetrain subsystem.
  */
 public class Drivetrain extends SubsystemBase {
+    /**
+     * A data class that stores 4 doubles corresponding to each motor.
+     */
+    public static class DriveState {
+        public final double fl;
+        public final double fr;
+        public final double bl;
+        public final double br;
+        public DriveState(double fl, double fr, double bl, double br) {
+            this.fl = fl;
+            this.fr = fr;
+            this.bl = bl;
+            this.br = br;
+        }
+    }
+
+
     private static Drivetrain instance = null;
 
     /**
@@ -45,7 +61,13 @@ public class Drivetrain extends SubsystemBase {
      * to base the field-centric drive on.
      * @param heading the initial heading
      */
-    public void setInitialHeading(double heading) { this.initialHeading = heading; }
+    public void setInitialHeading(double heading) { initialHeading = heading; }
+
+    /**
+     * Returns the initial heading of the robot for a reference.
+     * @return the initial heading
+     */
+    public double getInitialHeading() { return initialHeading; }
 
     /**
      * Drives the robot using robot centric.
@@ -53,7 +75,7 @@ public class Drivetrain extends SubsystemBase {
      * @param y positive moves it forwards, negative moves it backwards
      * @param rot positive spins it clockwise, negative spins it counter-clockwise
      */
-    public void driveRC(double x, double y, double rot) {
+    public void driveRobotCentric(double x, double y, double rot) {
         double denominator = Math.max(Math.abs(y) + Math.abs(x) + Math.abs(rot), 1);
         motorFL.setPower((-y - x - rot) / denominator);
         motorFR.setPower((-y + x + rot) / denominator);
@@ -67,7 +89,7 @@ public class Drivetrain extends SubsystemBase {
      * @param y positive moves it forwards, negative moves it backwards
      * @param rot positive spins it clockwise, negative spins it counter-clockwise
      */
-    public void driveFC(double x, double y, double rot, double heading) {
+    public void driveFieldCentric(double x, double y, double rot, double heading) {
         /*
             [ cos   -sin ] [ x ] = [ x cos - y sin ]
             [ sin    cos ] [ y ] = [ x sin + y cos ]
@@ -77,7 +99,7 @@ public class Drivetrain extends SubsystemBase {
         double cos = Math.cos(angle);
         double robotX = x * cos - y * sin;
         double robotY = x * sin + y * cos;
-        driveRC(robotX, robotY, rot);
+        driveRobotCentric(robotX, robotY, rot);
     }
 
     /**
@@ -94,6 +116,19 @@ public class Drivetrain extends SubsystemBase {
     public void setFRPower(double power) { motorFR.setPower(power); }
     public void setBLPower(double power) { motorBL.setPower(power); }
     public void setBRPower(double power) { motorBR.setPower(power); }
+
+    /**
+     * Returns the current drive state with each motor's position.
+     * @return the drive state.
+     */
+    public DriveState getDriveState() {
+        return new DriveState(
+                motorFL.getCurrentPosition(),
+                motorFR.getCurrentPosition(),
+                motorBL.getCurrentPosition(),
+                motorBR.getCurrentPosition()
+        );
+    }
 
     /**
      * Returns the current position of the front left motor
