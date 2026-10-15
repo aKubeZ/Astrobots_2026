@@ -10,6 +10,7 @@ public class Shoot extends CommandBase {
 
     public Shoot(double power) {
         this.power = power;
+        addRequirements(shooter);
     }
 
     @Override
