@@ -61,7 +61,7 @@ public class BotContainer {
         switch (buttonConfig) {
             case AUTO: break;
             case TELE: {
-                drivetrain.setDefaultCommand(new Drive(false,
+                drivetrain.setDefaultCommand(new Drive(true,
                         pilot::getLeftX,
                         pilot::getLeftY,
                         pilot::getRightX
@@ -91,7 +91,11 @@ public class BotContainer {
     private void configBindings() {
         switch (buttonConfig) {
             case AUTO: break;
-            case TELE: break;
+            case TELE: {
+                pilot.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER).whenActive(
+                        () -> drivetrain.setInitialHeading(gyroscope.getHeading())
+                );
+            } break;
             case DRIVETRAIN_TEST: break;
         }
     }

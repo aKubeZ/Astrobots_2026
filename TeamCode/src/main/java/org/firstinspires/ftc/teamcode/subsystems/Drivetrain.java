@@ -79,8 +79,8 @@ public class Drivetrain extends SubsystemBase {
         double denominator = Math.max(Math.abs(y) + Math.abs(x) + Math.abs(rot), 1);
         motorFL.setPower((-y - x - rot) / denominator);
         motorFR.setPower((-y + x + rot) / denominator);
-        motorBL.setPower((-y + x - rot) / denominator);
-        motorBR.setPower((-y - x + rot) / denominator);
+        motorBL.setPower((y - x + rot) / denominator);
+        motorBR.setPower((y + x - rot) / denominator);
     }
 
      /**
