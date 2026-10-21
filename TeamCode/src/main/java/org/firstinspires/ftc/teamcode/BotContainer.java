@@ -8,10 +8,12 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.teamcode.commands.AutoCommand;
 import org.firstinspires.ftc.teamcode.commands.DataLog;
 import org.firstinspires.ftc.teamcode.commands.TestDrive;
+import org.firstinspires.ftc.teamcode.commands.Shoot;
 import org.firstinspires.ftc.teamcode.subsystems.Gyroscope;
 
 import org.firstinspires.ftc.teamcode.commands.Drive;
 import org.firstinspires.ftc.teamcode.subsystems.Drivetrain;
+import org.firstinspires.ftc.teamcode.subsystems.Shooter;
 
 public class BotContainer {
     private static final ElapsedTime stopwatch = new ElapsedTime();
@@ -22,11 +24,16 @@ public class BotContainer {
      */
     public static double timestamp() { return stopwatch.seconds(); }
 
-
+    // controllers
     private final GamepadEx pilot = Constants.pilot;
     private final GamepadEx copilot = Constants.copilot;
+
+    // subsystems
     private final Drivetrain drivetrain = Drivetrain.getInstance();
     private final Gyroscope gyroscope = Gyroscope.getInstance();
+    private final Shooter shooter = Shooter.getInstance();
+
+    // others
     private DataLog logger;
     private final Bot.Alliance alliance;
     private final Bot.ButtonConfig buttonConfig;
