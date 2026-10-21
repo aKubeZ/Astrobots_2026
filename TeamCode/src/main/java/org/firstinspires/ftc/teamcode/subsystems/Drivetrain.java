@@ -86,7 +86,7 @@ public class Drivetrain extends SubsystemBase {
     }
 
      /**
-     * Drives the robot using field centric (NOT IMPLEMENTED YET PLS DO NOT USE YET)
+     * Drives the robot using field centric
      * @param x positive moves it right, negative moves it left
      * @param y positive moves it forwards, negative moves it backwards
      * @param rot positive spins it clockwise, negative spins it counter-clockwise
@@ -102,6 +102,20 @@ public class Drivetrain extends SubsystemBase {
         double robotX = x * cos - y * sin;
         double robotY = x * sin + y * cos;
         driveRobotCentric(robotX, robotY, rot);
+    }
+
+    /**
+     * Drives the robot using field centric, but with each input bounded by the constant.
+     * @param x positive moves it right, negative moves it left
+     * @param y positive moves it forwards, negative moves it backwards
+     * @param rot positive spins it clockwise, negative spins it counter-clockwise
+     */
+    public void driveFieldCentricBounded(double x, double y, double rot, double heading) {
+        double bound = Constants.AutoConstants.driveMax;
+        double boundedX = Math.max(Math.min(x, bound), -bound);
+        double boundedY = Math.max(Math.min(y, bound), -bound);
+        double boundedRot = Math.max(Math.min(rot, bound), -bound);
+        driveFieldCentric(boundedX, boundedY, boundedRot, heading);
     }
 
     /**
