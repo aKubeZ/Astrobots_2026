@@ -9,22 +9,23 @@ public class Bot extends Robot {
     public final OpMode opMode;
 
     public enum OpMode {
-        TELEOP, AUTO
+        TELEOP, AUTO, NONE
     }
 
     public enum Alliance {
         BLUE, RED
     }
 
-    public enum ButtonConfig {
+    public enum Config {
         TELE,
         AUTO,
-        DRIVETRAIN_TEST
+        DRIVETRAIN_TEST,
+        LOCALIZATION_TEST,
     }
 
-    public Bot(OpMode opMode, Alliance alliance, ButtonConfig buttonConfig) {
+    public Bot(OpMode opMode, Alliance alliance, Config config) {
         this.opMode = opMode;
-        container = new BotContainer(alliance, buttonConfig);
+        container = new BotContainer(alliance, config);
 
         switch (opMode) {
             case TELEOP: {

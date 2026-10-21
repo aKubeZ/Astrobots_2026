@@ -47,18 +47,14 @@ public class DataLog extends CommandBase {
         }
     }
 
-    private ArrayList<Entry> entries;
+    private final ArrayList<Entry> entries;
 
     /**
      * Create a data logger
-     * @param entries the entries to be logged
      */
-    public DataLog(Entry... entries) {
-        this.entries = new ArrayList<>(Arrays.asList(entries));
+    public DataLog() {
+        this.entries = new ArrayList<>();
     }
-
-    @Override
-    public void initialize() { }
 
     @Override
     public void execute() {
@@ -79,6 +75,15 @@ public class DataLog extends CommandBase {
      * @param entry entry to be added
      */
     public void addEntry(Entry entry) { entries.add(entry); }
+
+    /**
+     * Appends an entry of the name and supplier.
+     * @param name the name of the entry
+     * @param supplier the supplier of the string to the entry.
+     */
+    public void addEntry(String name, Supplier<String> supplier) {
+        entries.add(new Entry(name, supplier));
+    }
 
     /**
      * Removes an entry based on the name

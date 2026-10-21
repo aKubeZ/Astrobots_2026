@@ -19,6 +19,6 @@ public class MainTele extends CommandOpMode {
         Constants.pilot = new GamepadEx(gamepad1);
         Constants.copilot = new GamepadEx(gamepad2);
 
-        bot = new Bot(Bot.OpMode.TELEOP, Bot.Alliance.BLUE, Bot.ButtonConfig.TELE);
+        bot = new Bot(Bot.OpMode.TELEOP, Bot.Alliance.BLUE, Bot.Config.TELE);
     }
 }

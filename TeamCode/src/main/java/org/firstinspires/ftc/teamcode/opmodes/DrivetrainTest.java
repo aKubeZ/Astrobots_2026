@@ -19,6 +19,6 @@ public class DrivetrainTest extends CommandOpMode {
         Constants.pilot = new GamepadEx(gamepad1);
         Constants.copilot = new GamepadEx(gamepad2);
 
-        bot = new Bot(Bot.OpMode.TELEOP, Bot.Alliance.BLUE, Bot.ButtonConfig.DRIVETRAIN_TEST);
+        bot = new Bot(Bot.OpMode.NONE, Bot.Alliance.BLUE, Bot.Config.DRIVETRAIN_TEST);
     }
 }

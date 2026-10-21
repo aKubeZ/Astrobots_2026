@@ -18,11 +18,9 @@ public class Shooter extends SubsystemBase {
 
     private DcMotorEx motor;
     private Shooter() {
-        motor = Constants.hardwareMap.get(DcMotorEx.class, "shooter");
+        motor = Constants.hardwareMap.get(DcMotorEx.class, "sh");
         motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
 
-    public void run(double power) {
-        motor.setPower(power);
-    }
+    public void run(double power) { motor.setPower(power); }
 }

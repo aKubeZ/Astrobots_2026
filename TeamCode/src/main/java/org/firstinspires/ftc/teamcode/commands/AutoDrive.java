@@ -32,5 +32,6 @@ public class AutoDrive extends CommandBase {
         double deltaT = timestamp - previousTimestamp;
         localizer.update(deltaT);
         tracer.trace();
+        previousTimestamp = timestamp;
     }
 }

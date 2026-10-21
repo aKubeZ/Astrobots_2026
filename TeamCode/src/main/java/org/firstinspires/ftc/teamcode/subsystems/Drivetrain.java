@@ -43,17 +43,19 @@ public class Drivetrain extends SubsystemBase {
     DcMotorEx motorFR;
     DcMotorEx motorBL;
     DcMotorEx motorBR;
-    double initialHeading = 0;
+    double eastHeading = 0;
     private Drivetrain() {
         motorFL = Constants.hardwareMap.get(DcMotorEx.class, "fl");
         motorFR = Constants.hardwareMap.get(DcMotorEx.class, "fr");
         motorBL = Constants.hardwareMap.get(DcMotorEx.class, "bl");
         motorBR = Constants.hardwareMap.get(DcMotorEx.class, "br");
 
-        motorFL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        motorFR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        motorBL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        motorBR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        if (!Constants.AutoConstants.neutralDrivetrain) {
+            motorFL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+            motorFR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+            motorBL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+            motorBR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        }
     }
 
     /**
@@ -61,13 +63,13 @@ public class Drivetrain extends SubsystemBase {
      * to base the field-centric drive on.
      * @param heading the initial heading
      */
-    public void setInitialHeading(double heading) { initialHeading = heading; }
+    public void setEastHeading(double heading) { eastHeading += heading; }
 
     /**
      * Returns the initial heading of the robot for a reference.
      * @return the initial heading
      */
-    public double getInitialHeading() { return initialHeading; }
+    public double getEastHeading() { return eastHeading; }
 
     /**
      * Drives the robot using robot centric.
@@ -94,7 +96,7 @@ public class Drivetrain extends SubsystemBase {
             [ cos   -sin ] [ x ] = [ x cos - y sin ]
             [ sin    cos ] [ y ] = [ x sin + y cos ]
          */
-        double angle = -(heading - initialHeading); // flipped bc clockwise
+        double angle = -(heading - eastHeading); // flipped bc clockwise
         double sin = Math.sin(angle);
         double cos = Math.cos(angle);
         double robotX = x * cos - y * sin;

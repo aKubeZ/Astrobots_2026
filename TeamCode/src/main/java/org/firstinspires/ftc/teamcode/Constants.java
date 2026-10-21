@@ -15,9 +15,9 @@ public class Constants {
     public static GamepadEx copilot = null;
 
     public static class AutoConstants {
-        public final static double inchesPerTick = 10;
-        public final static double localizeXScale = 10;
-        public final static double localizeYScale = 10;
+        public final static double inchesPerTick = ((double) 48 / 2000);
+        public final static double localizeScale = 0.24;
+        public static boolean neutralDrivetrain = false;
         public final static PIDData xyPID = new PIDData(1, 0, 0);
         public final static PIDData headingPID = new PIDData(1, 0, 0);
     }

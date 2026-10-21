@@ -18,7 +18,7 @@ public class Intake extends SubsystemBase {
 
     private DcMotorEx motor;
     private Intake() {
-        motor = Constants.hardwareMap.get(DcMotorEx.class, "intake");
+        motor = Constants.hardwareMap.get(DcMotorEx.class, "in");
         motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
 
